@@ -1,4 +1,5 @@
 import mongoose,{Schema} from "mongoose";
+import roles from "../../src/utils/Roles.js";
 
 const userSchema= new Schema({
     name:{
@@ -18,6 +19,19 @@ const userSchema= new Schema({
     confirmEmail:{
         type:Boolean,
         default:false
+    },
+    role:{
+        type:String,
+        enum:[roles.Admin,roles.User],
+        default:roles.User
+    },
+    image:{
+        type:Object,
+    },
+    status:{
+        type:String,
+        enum:["Online","Offline"],
+        default:"Offline"
     },
     gender:{
         type:String,

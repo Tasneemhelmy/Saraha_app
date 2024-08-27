@@ -16,8 +16,6 @@ const sendEmail=async({from='"Maddison Foo Koch 👻" <fs4191884@gmail.com>',to,
         html,
     })  
     //return mailOptions.rejected.length?false:true
-    console.log(info)
-
     
 }
 export default sendEmail

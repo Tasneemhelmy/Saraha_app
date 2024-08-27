@@ -1,0 +1,49 @@
+
+<%- include('./htmlHeader.ejs') %>
+<nav class="navbar navbar-expand-lg bg-custom navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="img/logo300.png" width="54" alt=""> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+ Menu <span class="navbar-toggler-icon"></span>
+</button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Auth/signUp">signUp</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Auth/logIn">logIn</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<!-- /navbar -->
+
+<div class="container text-center my-5">
+    <div class="user my-3">
+        <i class="fas fa-user-secret user-icon"></i>
+        <h2 class="login">logIn</h2>
+    </div>
+    <div class="card p-5 w-50 m-auto">
+        <form method="POST" action="/Auth/logIn">
+            <input class="form-control" placeholder="Enter your email" type="text" name="email">
+            <input class="form-control my-4 " placeholder="Enter your Password" type="password" name="password">
+            <button class="btn btn-default-outline my-4 w-100 rounded">logIn</button>
+            <% if (error) { %>
+                <div class="alert alert-warning" role="alert">
+                    <strong><%= error %></strong> 
+                </div>
+            <% } %>
+            <p><a class="text-muted forgot btn" href="/User/forgetPass">I Forgot My Password</a></p>
+            <p class="text-center mt-2"> don't have account ? <a style=" text-decoration: none"  href="/Auth/signUp">signUp</a></p>
+        </form>
+    </div>
+</div>
+
+
+<%- include('./htmlFooter.ejs') %>
+

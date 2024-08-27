@@ -1,0 +1,25 @@
+<%- include('./htmlHeader.ejs') %>
+<div class="container text-center my-5">
+    <div class="user my-3">
+        <i class="far fa-edit user-icon"></i>
+        <h2 class="login">Register</h2>
+    </div>
+    <div class="card p-5 w-50 m-auto">
+        <form method="POST" action="/Auth/signUp">
+            <input class="form-control" placeholder="Enter your Name" type="text" name="name" value="<%= data?.name %>">
+            <input class="form-control my-2 " placeholder="Enter your email" type="email" name="email" value="<%= data?.email %>">
+            <input class="form-control  " placeholder="Enter your Password" type="password" name="password" value="<%= data?.password %>" >
+            <input class="form-control  my-2" placeholder="Password Confirmation" type="password" name="PasswordConfirmation" value="<%= data?.password %>">
+            <button class="btn btn-default-outline my-4 w-100 rounded">Register</button>
+            <% if (error) { %>
+                <div class="alert alert-warning" role="alert">
+                    <strong><%= error %></strong> 
+                </div>
+            <% } %>
+            <p class="text-center mt-2"> Aready Have Account ? <a style=" text-decoration: none"  href="/Auth/logIn">logIn</a></p>
+        </div>
+        </form>
+    </div>
+</div>
+
+<%- include('./htmlFooter.ejs') %>
