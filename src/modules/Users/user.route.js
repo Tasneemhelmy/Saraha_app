@@ -6,7 +6,9 @@ import vaildateSchema from "../../middelware/vaildate.js";
 const router=Router()
 
 router.get('/displayProfile',UserController.displayProfile)
-// router.patch('/confirm',UserController.confirmEmail)
+    .get('/logOut',UserController.logOut)
+    .get('/confirm',UserController.confirm)
+    .get('/confirm/:token',UserController.confirmEmail)
 // router.post('/logIn',UserController.logIn)
 
 export default router

@@ -29,7 +29,7 @@
                     <a class="nav-link" href="">Settings</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">Logout</a>
+                    <a class="nav-link" href="/user/logOut">Logout</a>
                 </li>
             </ul>
         </div>
@@ -37,6 +37,10 @@
 </nav>
 <!-- /navbar -->
 <div class="container text-center py-5 my-5 text-center">
+    <p>Hii <% if (user?.email) { %>
+        <%= user.email %> <% } %>
+    
+   </p>
     <div class="card py-5 mb-5">
         <a href="" data-toggle="modal" data-target="#profile">
             <img src="img/avatar.png" class="avatar " alt="">

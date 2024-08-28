@@ -1,6 +1,7 @@
 import env from'dotenv'
 import session from 'express-session';
 import flash from 'flash';
+import monogoDbStore from 'connect-mongodb-session'
 
 import connected from "../database/connection.js";
 import userRoute from './modules/Users/user.route.js'
@@ -11,6 +12,12 @@ const bootstrap=(app,express)=>{
     // process.on('uncaughtException',(err)=>{
     //     console.log(err)
     // })
+    var MongoDBStore=monogoDbStore(session)
+    var store = new MongoDBStore({
+        uri:"mongodb://127.0.0.1:27017/sarahaApp",
+        collection: 'mySessions'
+    });
+    
     app.use(express.urlencoded({extended:true})) 
     app.set('views',"./src/views")
     app.set('view engine','ejs')
@@ -19,7 +26,9 @@ const bootstrap=(app,express)=>{
     app.use(session({
         secret: 'your_secret_key',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        store
+
     }));
     app.use(flash())
 

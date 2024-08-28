@@ -14,19 +14,35 @@ export const displayProfile=async(req,res,next)=>{
         js:'../shared/Js/signUp.js',
         title:'Profile',
         user:req.session?.user
-    })
+    })  
+}  
+
+export const logOut=async(req,res,next)=>{
+    const {id}=req.session.user
+    await User.updateOne({_id:id},{status:"Offline"})
+    return res.redirect('/auth/logIn')
 }
+
+export const aploadImage=async(req,res,next)=>{
+
+}
+
+export const confirm=async(req,res,next)=>{
+    return res.render('confirm',{
+    css:'../shared/Css/signUp.css',
+    js:'../shared/Js/signUp.js',
+    title:'confirmYourEmail',
+})  
+}  
 
 
                        //ConfirmEmail
-export const confirmEmail=asyncHandler(async(req,res,next)=>{
-            const {email,OTP}=req.body
-            if(!OTP) return res.status(400).json({message:"You must Enter The Code 😤"})
-        
-            const confirm= await User.findOneAndUpdate({email,OTP},{confirmEmail:true,OTP:null})  
-            if(!confirm) return res.status(400).json({message:"Invaild Email Or code"})
-                res.status(200).json({message:"Email Confirmed👏🏻"})
-        
-        })
+export const confirmEmail=async(req,res,next)=>{
+    const {token}=req.params
+    const payload=jwt.verify(token,process.env.TOKEN_KEY)
+        await User.updateOne({email:payload.email},{confirmEmail:true})
+        return res.redirect('/auth/logIn')
+
+        }
 //-------------------------------------------------------------------------------------------------------------------------
 

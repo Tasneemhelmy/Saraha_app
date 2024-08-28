@@ -2,20 +2,22 @@ import User from "../../../../database/models/user.model.js"
 import bcryptjs from "bcryptjs"
 import jwt from'jsonwebtoken'
 import { customAlphabet } from "nanoid"
-import sendEmail from "../../../utils/sendEmail.js"
+import sendEmail, { createHtml } from "../../../utils/sendEmail.js"
 import session from "express-session"
 
 
 
 export const signUpDisblay=(req,res,next)=>{
     //console.log(req.flash('error')[0])
+    req.session.destroy()
     return res.render('signUp',{
         css:'../shared/Css/signUp.css',
         js:'../shared/Js/signUp.js',
         title:'signUp',
         error:"",
-        data:{}
+        data:{}   
     })  
+
 } 
 
 
@@ -41,14 +43,17 @@ export const signUp=async(req,res,next)=>{
     const randomNumber=customAlphabet('0123456789',4)
     req.body.OTP=randomNumber()
     const user=await User.insertMany(req.body)
-    sendEmail({to:email,html:`<h1>${req.body.OTP}</h1>`})
-    return res.redirect('/Auth/logIn')
+    const emailToken=jwt.sign({email},process.env.TOKEN_KEY)
+    const html=createHtml(emailToken)
+    sendEmail({to:email,html})
+    return res.redirect('/user/confirm')
 }
 //-----------------------------------------------------------------
 
 
 
 export const loginDisblay=(req,res,next)=>{
+    req.session.destroy()
     return res.render('logIn',{
         css:'../shared/Css/signUp.css',
         js:'../shared/Js/signUp.js',
@@ -56,6 +61,7 @@ export const loginDisblay=(req,res,next)=>{
         error:"",
         data:{}
     })
+    
 } 
 
                 //2. User Login:
@@ -72,15 +78,15 @@ export const logIn=async(req,res,next)=>{
             data:req.body
         })
     }
-    // if(!userExist.confirmEmail){
-    //     return res.render('logIn',{
-    //         css:'../shared/Css/signUp.css',
-    //         js:'../shared/Js/signUp.js',
-    //         title:'logIn',
-    //         error:"Please Confirm Your Email😤",
-    //         data:req.body
-    //     })
-    // }
+    if(!userExist.confirmEmail){
+        return res.render('logIn',{
+            css:'../shared/Css/signUp.css',
+            js:'../shared/Js/signUp.js',
+            title:'logIn',
+            error:"Please Confirm Your Email😤",
+            data:req.body
+        })
+    }
     const isMatch=bcryptjs.compareSync(password,userExist.password)
     if(!isMatch){
         return res.render('logIn',{
@@ -96,6 +102,7 @@ export const logIn=async(req,res,next)=>{
         id: userExist._id.toString(),
         email: userExist.email,
         role:userExist.role,
+
 
     };
     //res.send('User session set');

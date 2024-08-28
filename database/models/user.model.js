@@ -37,10 +37,8 @@ const userSchema= new Schema({
         type:String,
         enum:['female','male'],
         default:'female'
-    },
-    OTP:{
-        type:Number
     }
+
 
 })
 
