@@ -9,11 +9,12 @@ import sendEmail from '../../../utils/sendEmail.js'
 
 
 export const displayProfile=async(req,res,next)=>{
+    const user= await User.findById(req.session.user.id)
         return res.render('profile',{
         css:'../shared/Css/signUp.css',
         js:'../shared/Js/signUp.js',
         title:'Profile',
-        user:req.session?.user
+        user
     })  
 }  
 
@@ -24,6 +25,13 @@ export const logOut=async(req,res,next)=>{
 }
 
 export const aploadImage=async(req,res,next)=>{
+    const {id}=req.session.user
+    req.body.image=req.file?.filename
+    const user=await User.findById(id)
+    user.image= req.body.image
+    await user.save()
+    res.redirect('/user/displayProfile')
+    
 
 }
 
@@ -34,7 +42,6 @@ export const confirm=async(req,res,next)=>{
     title:'confirmYourEmail',
 })  
 }  
-
 
                        //ConfirmEmail
 export const confirmEmail=async(req,res,next)=>{

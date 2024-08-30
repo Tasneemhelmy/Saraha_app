@@ -26,12 +26,23 @@
 <div class="container text-center my-5">
     <div class="user my-3">
         <i class="fas fa-user-secret user-icon"></i>
-        <h2 class="login">logIn</h2>
-    </div>
+        <h2 class="login">logIn</h2>   
+    </div>    
     <div class="card p-5 w-50 m-auto">
         <form method="POST" action="/Auth/logIn">
             <input class="form-control" placeholder="Enter your email" type="text" name="email">
+    
+            <% if (vaildationErorr?.includes('email')) { %>
+                <p class="text-danger">Invaild Email</p>
+            <% } %>
+            
             <input class="form-control my-4 " placeholder="Enter your Password" type="password" name="password">
+        
+                <% if (vaildationErorr?.includes('password')) { %>
+                    <p class="text-danger">password must be 8 characters long and contain at least one lowercase letter,one uppercase letter,numbers,Special_Char</p>
+                    
+                <% } %>
+
             <button class="btn btn-default-outline my-4 w-100 rounded">logIn</button>
             <% if (error) { %>
                 <div class="alert alert-warning" role="alert">

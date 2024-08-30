@@ -1,13 +1,13 @@
 import User from "../../../../database/models/user.model.js"
 import bcryptjs from "bcryptjs"
 import jwt from'jsonwebtoken'
-import { customAlphabet } from "nanoid"
 import sendEmail, { createHtml } from "../../../utils/sendEmail.js"
-import session from "express-session"
+
 
 
 
 export const signUpDisblay=(req,res,next)=>{
+
     //console.log(req.flash('error')[0])
     req.session.destroy()
     return res.render('signUp',{
@@ -15,6 +15,7 @@ export const signUpDisblay=(req,res,next)=>{
         js:'../shared/Js/signUp.js',
         title:'signUp',
         error:"",
+        vaildationErorr:[],
         data:{}   
     })  
 
@@ -24,6 +25,7 @@ export const signUpDisblay=(req,res,next)=>{
 
 
 export const signUp=async(req,res,next)=>{
+
     const {email,password}=req.body
     const userExist=await User.findOne({email})
     if(userExist){
@@ -40,12 +42,10 @@ export const signUp=async(req,res,next)=>{
     //sendEmail({})
     const hashPass=bcryptjs.hashSync(password,9)
     req.body.password=hashPass
-    const randomNumber=customAlphabet('0123456789',4)
-    req.body.OTP=randomNumber()
     const user=await User.insertMany(req.body)
     const emailToken=jwt.sign({email},process.env.TOKEN_KEY)
     const html=createHtml(emailToken)
-    sendEmail({to:email,html})
+    sendEmail({to:email,html})  
     return res.redirect('/user/confirm')
 }
 //-----------------------------------------------------------------
@@ -59,6 +59,7 @@ export const loginDisblay=(req,res,next)=>{
         js:'../shared/Js/signUp.js',
         title:'logIn',
         error:"",
+        vaildationErorr:[],
         data:{}
     })
     
@@ -75,6 +76,7 @@ export const logIn=async(req,res,next)=>{
             js:'../shared/Js/signUp.js',
             title:'logIn',
             error:"Please signUp First😤",
+            vaildationErorr:[],
             data:req.body
         })
     }
@@ -84,6 +86,7 @@ export const logIn=async(req,res,next)=>{
             js:'../shared/Js/signUp.js',
             title:'logIn',
             error:"Please Confirm Your Email😤",
+            vaildationErorr:[],
             data:req.body
         })
     }
@@ -94,6 +97,7 @@ export const logIn=async(req,res,next)=>{
                     js:'../shared/Js/signUp.js',
                     title:'logIn',
                     error:"Invaild Email Or Password😤",
+                    vaildationErorr:[],
                     data:req.body
                 })
     }

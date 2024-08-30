@@ -1,4 +1,26 @@
 <%- include('./htmlHeader.ejs') %>
+<nav class="navbar navbar-expand-lg bg-custom navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="img/logo300.png" width="54" alt=""> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+ Menu <span class="navbar-toggler-icon"></span>
+</button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<!-- /navbar -->
 <div class="container text-center my-5">
     <div class="user my-3">
         <i class="far fa-edit user-icon"></i>
@@ -8,8 +30,25 @@
         <form method="POST" action="/Auth/signUp">
             <input class="form-control" placeholder="Enter your Name" type="text" name="name" value="<%= data?.name %>">
             <input class="form-control my-2 " placeholder="Enter your email" type="email" name="email" value="<%= data?.email %>">
-            <input class="form-control  " placeholder="Enter your Password" type="password" name="password" value="<%= data?.password %>" >
-            <input class="form-control  my-2" placeholder="Password Confirmation" type="password" name="PasswordConfirmation" value="<%= data?.password %>">
+            <% if (vaildationErorr?.includes('email')) { %>
+                <p class="text-danger">Invaild Email</p>
+                
+            <% } %>
+            <div class="password-container">
+                <input class="form-control my-2 " type="password" id="password" class="password-input" placeholder="Enter your password" name="password" value="<%= data?.password %>" >
+                <span class="show-password-toggle"  class="btn btn-outline-secondary" onclick="togglePasswordVisibility()">
+                    Show/Hide
+                </span>
+                <% if (vaildationErorr?.includes('password')) { %>
+                    <p class="text-danger">password must be 8 characters long and contain at least one lowercase letter,one uppercase letter,numbers,Special_Char</p>
+                    
+                <% } %>
+            </div>
+            <input class="form-control  my-2" placeholder="Password Confirmation"  name="confirmPassword" >
+            <% if (vaildationErorr?.includes('confirmPassword')) { %>
+                <p class="text-danger">confirmPassword must be as password</p>
+                
+            <% } %>
             <button class="btn btn-default-outline my-4 w-100 rounded">Register</button>
             <% if (error) { %>
                 <div class="alert alert-warning" role="alert">

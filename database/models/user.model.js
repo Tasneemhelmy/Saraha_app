@@ -41,6 +41,23 @@ const userSchema= new Schema({
 
 
 })
+userSchema.post('find', function(docs) {
+    if (Array.isArray(docs)) {
+        docs.forEach(doc => {
+            if (doc.image) {
+                doc.image = 'http://localhost:5000/uploads/' + doc.image;
+            }
+
+            
+        });
+    } else {
+        if (docs.image) {
+            docs.image = 'http://localhost:5000/uploads/' + docs.image;
+        }
+
+        
+    }
+});
 
 const User=mongoose.model('User',userSchema)
 export default User

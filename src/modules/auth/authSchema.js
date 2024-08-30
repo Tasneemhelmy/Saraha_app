@@ -9,7 +9,7 @@ export const userSchema=joi.object({
     confirmPassword:joi.string().valid(joi.ref('password')).required()
 }) .required()
 
-export const loginSchema=joi.object({
+export const loginSchema=joi.object({  
     email:joi.string().required().email(),
     password:joi.string().required().pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/)
     .message('password must be 8 characters long and contain at least one lowercase letter,one uppercase letter,numbers,Special_Char')

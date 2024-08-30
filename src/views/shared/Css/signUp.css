@@ -52,3 +52,13 @@ body {
 .card-body {
     border: 3px solid #00BfBf;
 }
+.circular-image{
+    margin-bottom: 30px;
+}
+
+.circular-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}

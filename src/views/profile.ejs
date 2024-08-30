@@ -37,20 +37,24 @@
 </nav>
 <!-- /navbar -->
 <div class="container text-center py-5 my-5 text-center">
-    <p>Hii <% if (user?.email) { %>
-        <%= user.email %> <% } %>
-    
-   </p>
     <div class="card py-5 mb-5">
-        <a href="" data-toggle="modal" data-target="#profile">
-            <img src="img/avatar.png" class="avatar " alt="">
-
-        </a>
-        <h3 class="py-2">Ahmed Abd Al-Muti</h3>
+    <div class="">
+        <div class="circular-image" >
+            <img src="http://localhost:5000/uploads/<%= user?.image %>" class="avatar " alt="">
+        </div>
+        <form method="POST" action="/user/uploadImage" class="px-4" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="formFile" class="form-label mt-2" >Upload Image</label>
+                <input class="btn btn-outline-secondary my-2 d-block m-auto" type="file" name="image" id="formFile">
+            </div>
+                <button type="submit" class="btn btn-outline-success mt-3 d-block m-auto">Upload</button>
+            </form>
+    </div>
+        <h3 class="py-2"><%= user?.name %></h3>
         <div class="container w-50 m-auto">
             <form action="" method="post">
                 <textarea class="form-control" name="" id="" cols="10" rows="9" placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)"></textarea>
-                <button class="btn btn-outline-info mt-3"><i class="far fa-paper-plane"></i> Send</button>
+                <button class="btn btn-outline-success mt-3 d-block m-auto"><i class="far fa-paper-plane"></i> Send</button>
             </form>
         </div>
     </div>
