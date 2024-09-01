@@ -26,14 +26,14 @@ const bootstrap=(app,express)=>{
     app.use(session({
         secret: 'your_secret_key',
         resave: false,
-        saveUninitialized: false,
+        saveUninitialized: true,
         store
 
     }));
     app.use(flash())
 
     app.use('/user',userRoute)
-    app.use('/massage',massageRouter)
+    app.use('/message',massageRouter)
     app.use('/Auth',authRouter)
     app.all('*',(req,res,next)=>{
         res.send("In-vaild Routing")

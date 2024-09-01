@@ -1,0 +1,51 @@
+<%- include('./htmlHeader.ejs') %>
+<nav class="navbar navbar-expand-lg bg-custom navbar-dark bg-dark ">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="img/logo300.png" width="54" alt=""> </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            Menu<span class="navbar-toggler-icon"></span>
+</button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/signUp">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/auth/logIn">Login</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto ">
+                <li class="nav-item">
+                    <a class="nav-link" href="">Settings</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- /navbar -->
+
+<div class="container text-center py-5 my-5 text-center">
+    <div class="card py-5 mb-5">
+        <div class="circular-image" >
+            <img src="http://localhost:5000/uploads/<%= user?.image %>" class="avatar " alt="">
+        </div>
+        <h3 class="py-2"><%= user.name %></h3>
+        <div class="container w-50 m-auto">
+            <form action="/message/addMessage/<%= user?._id %>" method="post">
+                <textarea class="form-control" name="content" id="" cols="10" rows="9" placeholder="You cannot send a Sarahah to yourself, share your profile with your friends :)"></textarea>
+                <% if (status=='Adedd successfully') { %>
+                    <p class="text-center text-success"><%=status%></p>
+                <% } %>
+                <% if (status!='Adedd successfully') { %>
+                    <p class="text-center text-danger"><%=status%></p>
+                <% } %>
+                <button class="btn btn-outline-info mt-3"><i class="far fa-paper-plane"></i> Send</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<%- include('./htmlFooter.ejs') %>

@@ -14,6 +14,18 @@ export const displayProfile=async(req,res,next)=>{
         css:'../shared/Css/signUp.css',
         js:'../shared/Js/signUp.js',
         title:'Profile',
+        link:`http://localhost:5000/user/displayProfile/${user._id}`,
+        user
+    })  
+}  
+
+export const displayShareProfile=async(req,res,next)=>{
+    const user= await User.findById(req.params.id)
+        return res.render('shareProfile',{
+        css:'../../shared/Css/signUp.css',
+        js:'../../shared/Js/signUp.js',
+        title:'Profile',
+        status:"",
         user
     })  
 }  

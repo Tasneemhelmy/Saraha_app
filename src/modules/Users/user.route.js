@@ -13,6 +13,7 @@ router.get('/displayProfile',authentication([roles.User]),UserController.display
     .post('/uploadImage',authentication([roles.User]),
             uploads(customVaildation.image).single('image')
             ,UserController.aploadImage)
+    .get('/displayProfile/:id',UserController.displayShareProfile)
     .get('/confirm/:token',UserController.confirmEmail)
 // router.post('/logIn',UserController.logIn)
 

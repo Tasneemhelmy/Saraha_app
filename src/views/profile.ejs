@@ -10,10 +10,10 @@
             <ul class="navbar-nav ml-auto d-none">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
+                    <a class="nav-link" href="/user/signUp">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="/user/logIn">Login</a>
                 </li>
             </ul>
 
@@ -23,7 +23,7 @@
             <ul class="navbar-nav ml-auto ">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="messages.html">Messages</a>
+                    <a class="nav-link" href="/message/displayMessage">Messages</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="">Settings</a>
@@ -58,7 +58,7 @@
             </form>
         </div>
     </div>
-    <button data-toggle="modal" data-target="#share" class="btn btn-default-outline share "><i class="fas fa-share-alt"></i>  Share Profile</button>
+    <a href="<%= link %>"  target="_blank" data-toggle="modal" data-target="#share" class="btn btn-default-outline share "><i class="fas fa-share-alt"></i>  Share Profile</a>
 
 </div>
 
@@ -68,10 +68,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Share Profile</h5>
+                <h3 >Share Profile</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
-      </button>
+        </button>
             </div>
             <div class="modal-body">
                 <p>host/messages/id</p>

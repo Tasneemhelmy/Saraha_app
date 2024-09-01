@@ -56,9 +56,14 @@ body {
     margin-bottom: 30px;
 }
 
-.circular-image img {
+.circular-image img {  
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
+}
+.container .row  .col-md-12 .custom-card  p {
+    margin-left: 20px; /* Left margin of 20px */
+    font-size: 25px;
+    color: #0da39c; /* Font size of 25px */
 }
