@@ -10,10 +10,10 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="register.html">Register</a>
+                    <a class="nav-link" href="/Auth/signUp">Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="/Auth/logIn">Login</a>
                 </li>
             </ul>
 
@@ -36,9 +36,9 @@
             <% } %>
             <div class="password-container">
                 <input class="form-control my-2 " type="password" id="password" class="password-input" placeholder="Enter your password" name="password" value="<%= data?.password %>" >
-                <span class="show-password-toggle"  class="btn btn-outline-secondary" onclick="togglePasswordVisibility()">
+                <!-- <span class="show-password-toggle"  class="btn btn-outline-secondary" onclick="togglePasswordVisibility()">
                     Show/Hide
-                </span>
+                </span> -->
                 <% if (vaildationErorr?.includes('password')) { %>
                     <p class="text-danger">password must be 8 characters long and contain at least one lowercase letter,one uppercase letter,numbers,Special_Char</p>
                     

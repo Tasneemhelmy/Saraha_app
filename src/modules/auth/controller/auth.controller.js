@@ -35,6 +35,7 @@ export const signUp=async(req,res,next)=>{
             js:'../shared/Js/signUp.js',
             title:'signUp',
             error:"User Already Has an Account🤐",
+            vaildationErorr:[],
             data:req.body
         })
     }  
@@ -106,8 +107,6 @@ export const logIn=async(req,res,next)=>{
         id: userExist._id.toString(),
         email: userExist.email,
         role:userExist.role,
-
-
     };
     //res.send('User session set');
     userExist.status='Online'
